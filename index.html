@@ -772,15 +772,104 @@
     color: rgba(245,241,232,0.5);
   }
 
-  /* ===== RESPONSIVE ===== */
+  /* ===== RESPONSIVE TABLET (≤900px) ===== */
   @media (max-width: 900px) {
+    .container { padding: 0 24px; }
+
+    /* Nav */
     .nav-links { display: none; }
-    .hero-grid, .section-head, .authority-grid { grid-template-columns: 1fr; gap: 48px; }
+    .logo-img { height: 56px; }
+    nav.main.scrolled .logo-img { height: 40px; }
+
+    /* Hero */
+    .hero { padding: 48px 0 64px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero h1 { font-size: 52px; }
+    .hero p { font-size: 16px; }
+    .hero-stats { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .stat-num { font-size: 36px; }
+
+    /* Secciones */
+    .section-head { grid-template-columns: 1fr; gap: 24px; margin-bottom: 40px; }
     .needs-grid { grid-template-columns: repeat(2, 1fr); }
+    .authority-grid { grid-template-columns: 1fr; gap: 48px; }
+    .tech-grid { grid-template-columns: 1fr 1fr; }
+    .tech-card.featured { grid-column: span 2; grid-row: auto; min-height: 300px; }
+    .sedes-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+
+    /* Padding secciones */
+    .needs, .tech, .sedes, .authority, .cta-final { padding: 80px 0; }
+  }
+
+  /* ===== RESPONSIVE MÓVIL (≤600px) ===== */
+  @media (max-width: 600px) {
+    .container { padding: 0 18px; }
+
+    /* Topbar */
+    .topbar-left { gap: 14px; font-size: 12px; }
+    .topbar-left a:first-child { display: none; } /* ocultar email, dejar solo teléfono */
+
+    /* Nav */
+    .logo-img { height: 48px; }
+    .btn-cta { padding: 10px 16px; font-size: 12px; }
+
+    /* Hero */
+    .hero { padding: 32px 0 48px; }
+    .hero h1 { font-size: clamp(36px, 10vw, 48px); margin: 16px 0 20px; }
+    .hero p { font-size: 15px; margin-bottom: 28px; }
+    .hero-ctas { flex-direction: column; align-items: flex-start; gap: 14px; }
+    .hero-stats { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .stat-num { font-size: 28px; }
+    .stat-label { font-size: 11px; }
+
+    /* Imagen hero — aspect ratio más cuadrado en móvil */
+    .hero-visual { aspect-ratio: 4 / 4.5; }
+    .hero-overlay-text {
+      font-size: clamp(26px, 8vw, 38px);
+      bottom: 20px;
+      left: 18px;
+      right: 12px;
+      line-height: 1.1;
+    }
+
+    /* Trust strip */
+    .trust-inner { flex-direction: column; gap: 12px; align-items: flex-start; }
+
+    /* Needs */
+    .needs { padding: 60px 0; }
+    .needs-grid { grid-template-columns: 1fr; }
+    .need-card { min-height: auto; padding: 28px 22px 32px; }
+    .section-head h2 { font-size: 32px; }
+
+    /* Autoridad */
+    .authority { padding: 60px 0; }
+    .authority-content h2 { font-size: 30px; }
+    .credentials { grid-template-columns: 1fr 1fr; gap: 16px 20px; }
+    .credential-value { font-size: 15px; }
+
+    /* Tech */
+    .tech { padding: 60px 0; }
     .tech-grid { grid-template-columns: 1fr; }
-    .tech-card.featured { grid-row: auto; min-height: 360px; }
-    .sedes-grid { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .tech-card.featured { grid-column: auto; min-height: 280px; }
+    .tech-card { min-height: auto; padding: 28px; }
+    .tech-card.featured h3 { font-size: 28px; }
+
+    /* Sedes */
+    .sedes { padding: 60px 0; }
+    .sedes-grid { grid-template-columns: 1fr; gap: 32px; }
+    .sedes-grid .sede-card:last-child { display: none; } /* Porto Pi se oculta en móvil muy pequeño, menos prioritario */
+
+    /* CTA final */
+    .cta-final { padding: 60px 0 80px; }
+    .cta-final h2 { font-size: clamp(30px, 8vw, 44px); }
+    .cta-group { flex-direction: column; gap: 14px; }
+    .btn-cta-lg { width: 100%; justify-content: center; }
+
+    /* Footer */
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+    .footer-brand p { max-width: 100%; }
   }
 </style>
 </head>
