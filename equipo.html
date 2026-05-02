@@ -343,28 +343,63 @@
   }
   .whatsapp-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
 
-  /* RESPONSIVE */
+  /* RESPONSIVE TABLET */
   @media (max-width: 900px) {
     .nav-links { display: none; }
     .logo-img { height: 56px; }
     .doctor-block, .doctor-block.reverse {
-      grid-template-columns: 1fr; gap: 40px;
+      grid-template-columns: 1fr; gap: 36px;
     }
     .doctor-block.reverse .doctor-photo,
     .doctor-block.reverse .doctor-info { order: unset; }
-    .doctor-portrait { max-width: 420px; }
+    .doctor-portrait { max-width: 480px; margin: 0 auto; }
+    .team-section { padding: 64px 0; }
+    .doctor-block { padding: 56px 0; }
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   }
+
+  /* RESPONSIVE MÓVIL */
   @media (max-width: 600px) {
     .container { padding: 0 18px; }
     .topbar-left a:first-child { display: none; }
-    .logo-img { height: 48px; }
-    .page-hero { padding: 48px 0 40px; }
-    .team-section { padding: 60px 0; }
-    .doctor-block { padding: 48px 0; gap: 32px; }
-    .doctor-credentials { grid-template-columns: 1fr; }
+
+    /* Hero */
+    .page-hero { height: 300px; }
+    .page-hero-content { padding: 0 18px; }
+    .page-hero h1 { font-size: 32px; margin: 12px 0 14px; }
+    .page-hero p { font-size: 13px; line-height: 1.6; max-width: 280px; }
+
+    /* Nav */
+    .logo-img { height: 44px; }
+    .btn-cta { padding: 10px 14px; font-size: 12px; }
+
+    /* Doctors */
+    .team-section { padding: 40px 0; }
+    .doctor-block { padding: 36px 0; gap: 24px; }
+    .doctor-portrait { max-width: 100%; aspect-ratio: 4/3; }
+    .doctor-portrait img { object-position: center 15%; }
+    .doctor-name-tag h2 { font-size: 20px; }
+    .doctor-name-tag .role { font-size: 11px; }
+    .doctor-intro { font-size: 19px; margin-bottom: 16px; }
+    .doctor-bio { font-size: 14px; line-height: 1.65; margin-bottom: 20px; }
+    .specialties { gap: 6px; margin-bottom: 20px; }
+    .pill { font-size: 11px; padding: 5px 11px; }
+    .doctor-credentials { grid-template-columns: 1fr 1fr; gap: 14px 20px; padding-top: 20px; margin-bottom: 16px; }
+    .cred-label { font-size: 10px; }
+    .cred-value { font-size: 14px; }
+    .memberships li { font-size: 12px; padding: 6px 0; }
+
+    /* CTA */
+    .team-cta { padding: 48px 0; }
+    .team-cta h2 { font-size: 30px; }
+    .team-cta p { font-size: 14px; margin-bottom: 24px; }
+    .btn-cta-light { width: 100%; justify-content: center; padding: 14px 20px; }
+
+    /* Footer */
     .footer-grid { grid-template-columns: 1fr; gap: 24px; }
     .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+
+    /* WhatsApp */
     .whatsapp-btn { padding: 14px; border-radius: 50%; bottom: 20px; right: 20px; }
     .whatsapp-btn span { display: none; }
     .whatsapp-btn svg { width: 26px; height: 26px; }
