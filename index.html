@@ -809,7 +809,8 @@
     border: none;
     cursor: pointer;
     padding: 8px;
-    z-index: 200;
+    position: relative;
+    z-index: 300;
   }
   .hamburger span {
     display: block;
@@ -826,13 +827,13 @@
   /* MENÚ MÓVIL — dropdown desde nav */
   .mobile-menu {
     display: none;
-    position: absolute;
-    top: 100%; left: 0; right: 0;
+    position: fixed;
+    left: 0; right: 0;
     background: var(--cream);
     border-bottom: 2px solid var(--line);
     box-shadow: 0 12px 32px rgba(30, 55, 81, 0.12);
     flex-direction: column;
-    z-index: 150;
+    z-index: 250;
   }
   .mobile-menu.open {
     display: flex;
@@ -1010,10 +1011,10 @@
       <li><a href="#sedes">Sedes</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
+    <a href="#" class="btn-cta nav-btn-cta" onclick="document.getElementById('modal-llamamos').classList.add('open');return false;">Te llamamos</a>
     <button class="hamburger" id="hamburger" aria-label="Menú" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
-    <a href="#" class="btn-cta nav-btn-cta" onclick="document.getElementById('modal-llamamos').classList.add('open');return false;">Te llamamos</a>
   </div>
 </nav>
 
@@ -1627,7 +1628,8 @@
   (function() {
     var hamburger = document.getElementById('hamburger');
     var mobileMenu = document.getElementById('mobile-menu');
-    if (!hamburger || !mobileMenu) return;
+    var nav = document.querySelector('nav.main');
+    if (!hamburger || !mobileMenu || !nav) return;
 
     function closeMenu() {
       mobileMenu.style.display = 'none';
@@ -1635,6 +1637,8 @@
       hamburger.setAttribute('aria-expanded', 'false');
     }
     function openMenu() {
+      var navBottom = nav.getBoundingClientRect().bottom;
+      mobileMenu.style.top = navBottom + 'px';
       mobileMenu.style.display = 'flex';
       hamburger.classList.add('active');
       hamburger.setAttribute('aria-expanded', 'true');
