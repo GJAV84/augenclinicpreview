@@ -884,7 +884,7 @@
 
   @media (max-width: 900px) {
     .hamburger { display: flex; }
-    #nav-btn-cta { display: none; }
+    .nav-btn-cta { display: none !important; }
   }
     .logo-img { height: 56px; }
     nav.main.scrolled .logo-img { height: 40px; }
@@ -1013,7 +1013,7 @@
     <button class="hamburger" id="hamburger" aria-label="Menú" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
-    <a href="#" class="btn-cta" id="btn-te-llamamos" onclick="document.getElementById('modal-llamamos').classList.add('open');return false;" id="nav-btn-cta">Te llamamos</a>
+    <a href="#" class="btn-cta nav-btn-cta" onclick="document.getElementById('modal-llamamos').classList.add('open');return false;">Te llamamos</a>
   </div>
 </nav>
 
@@ -1624,24 +1624,43 @@
 
 
   // Hamburger menu
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
-  if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', function() {
-      const isOpen = mobileMenu.classList.toggle('open');
-      hamburger.classList.toggle('active');
-      hamburger.setAttribute('aria-expanded', isOpen);
-      document.body.style.overflow = isOpen ? 'hidden' : '';
+  (function() {
+    var hamburger = document.getElementById('hamburger');
+    var mobileMenu = document.getElementById('mobile-menu');
+    if (!hamburger || !mobileMenu) return;
+
+    function closeMenu() {
+      mobileMenu.style.display = 'none';
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+    function openMenu() {
+      mobileMenu.style.display = 'flex';
+      hamburger.classList.add('active');
+      hamburger.setAttribute('aria-expanded', 'true');
+    }
+
+    var isOpen = false;
+    hamburger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      isOpen = !isOpen;
+      isOpen ? openMenu() : closeMenu();
     });
-    mobileMenu.querySelectorAll('a:not(.mobile-cta)').forEach(function(link) {
+
+    mobileMenu.querySelectorAll('a').forEach(function(link) {
       link.addEventListener('click', function() {
-        mobileMenu.classList.remove('open');
-        hamburger.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', false);
-        document.body.style.overflow = '';
+        isOpen = false;
+        closeMenu();
       });
     });
-  }
+
+    document.addEventListener('click', function(e) {
+      if (isOpen && !mobileMenu.contains(e.target) && e.target !== hamburger) {
+        isOpen = false;
+        closeMenu();
+      }
+    });
+  })();
 
   // Modal Te llamamos
   (function() {
