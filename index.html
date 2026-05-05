@@ -833,18 +833,9 @@
     box-shadow: 0 12px 32px rgba(30, 55, 81, 0.12);
     flex-direction: column;
     z-index: 150;
-    overflow: hidden;
-    transform-origin: top;
-    transform: scaleY(0.95);
-    opacity: 0;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    pointer-events: none;
   }
   .mobile-menu.open {
     display: flex;
-    transform: scaleY(1);
-    opacity: 1;
-    pointer-events: all;
   }
   .mobile-menu a {
     font-family: 'Geist', sans-serif;
@@ -893,7 +884,7 @@
 
   @media (max-width: 900px) {
     .hamburger { display: flex; }
-    .btn-cta { display: none; }
+    #nav-btn-cta { display: none; }
   }
     .logo-img { height: 56px; }
     nav.main.scrolled .logo-img { height: 40px; }
@@ -1022,7 +1013,7 @@
     <button class="hamburger" id="hamburger" aria-label="Menú" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
-    <a href="#" class="btn-cta" id="btn-te-llamamos" onclick="document.getElementById('modal-llamamos').classList.add('open');return false;">Te llamamos</a>
+    <a href="#" class="btn-cta" id="btn-te-llamamos" onclick="document.getElementById('modal-llamamos').classList.add('open');return false;" id="nav-btn-cta">Te llamamos</a>
   </div>
 </nav>
 

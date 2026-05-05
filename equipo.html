@@ -353,7 +353,7 @@
 
   @media (max-width: 900px) {
     .hamburger { display: flex; }
-    .btn-cta { display: none; }
+    #nav-btn-cta { display: none; }
   }
     .logo-img { height: 56px; }
     .doctor-block, .doctor-block.reverse {
@@ -448,7 +448,7 @@
     <button class="hamburger" id="hamburger" aria-label="Menú" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
-    <a href="#" class="btn-cta" onclick="document.getElementById('modal-llamamos').classList.add('open');return false;">Te llamamos</a>
+    <a href="#" class="btn-cta" onclick="document.getElementById('modal-llamamos').classList.add('open');return false;" id="nav-btn-cta">Te llamamos</a>
   </div>
 </nav>
 
