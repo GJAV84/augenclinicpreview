@@ -796,12 +796,83 @@
     color: rgba(245,241,232,0.5);
   }
 
+
+  /* HAMBURGER */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 200;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--ink);
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+  .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* MENÚ MÓVIL */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--cream);
+    z-index: 150;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 100px 32px 40px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line-soft);
+    width: 100%;
+    text-align: center;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--copper); }
+  .mobile-menu a.active { color: var(--forest); font-weight: 400; }
+  .mobile-menu .mobile-cta {
+    margin-top: 24px;
+    background: var(--forest);
+    color: var(--bone) !important;
+    padding: 16px 40px;
+    font-family: 'Geist', sans-serif;
+    font-size: 14px !important;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border: none;
+    width: auto;
+  }
+
   /* ===== RESPONSIVE TABLET (≤900px) ===== */
   @media (max-width: 900px) {
     .container { padding: 0 24px; }
 
     /* Nav */
     .nav-links { display: none; }
+
+  @media (max-width: 900px) {
+    .hamburger { display: flex; }
+    .btn-cta { display: none; }
+  }
     .logo-img { height: 56px; }
     nav.main.scrolled .logo-img { height: 40px; }
 
@@ -926,6 +997,9 @@
       <li><a href="#sedes">Sedes</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <a href="#" class="btn-cta" id="btn-te-llamamos" onclick="document.getElementById('modal-llamamos').classList.add('open');return false;">Te llamamos</a>
   </div>
 </nav>
@@ -938,7 +1012,10 @@
       <h1><em>Oftalmología de precisión</em> en el corazón del Mediterráneo.</h1>
       <p>Tecnología avanzada, especialistas internacionales y una atención que cuida cada detalle.</p>
       <div class="hero-ctas">
-        <a href="#" class="btn-cta">Reservar consulta</a>
+        <button class="hamburger" id="hamburger" aria-label="Menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="#" class="btn-cta">Reservar consulta</a>
         <a href="equipo.html" class="btn-ghost">Conocer al equipo médico</a>
       </div>
       <div class="hero-stats">
@@ -1295,6 +1372,16 @@
   </div>
 </footer>
 
+<!-- MENÚ MÓVIL -->
+<div id="mobile-menu" class="mobile-menu">
+  <a href="#hero" >Home</a>
+  <a href="#servicios">Servicios</a>
+  <a href="equipo.html">Equipo</a>
+  <a href="#sedes">Sedes</a>
+  <a href="#contacto">Contacto</a>
+  <a href="#" class="mobile-cta" onclick="document.getElementById('mobile-menu').classList.remove('open');document.getElementById('hamburger').classList.remove('active');document.body.style.overflow='';document.getElementById('modal-llamamos').classList.add('open');return false;">Te llamamos</a>
+</div>
+
 <!-- MODAL TE LLAMAMOS -->
 <div id="modal-llamamos" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <div class="modal-box">
@@ -1521,6 +1608,27 @@
       nav.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
   })();
+
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', function() {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a:not(.mobile-cta)').forEach(function(link) {
+      link.addEventListener('click', function() {
+        mobileMenu.classList.remove('open');
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', false);
+        document.body.style.overflow = '';
+      });
+    });
+  }
 
   // Modal Te llamamos
   (function() {

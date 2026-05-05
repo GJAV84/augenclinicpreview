@@ -348,6 +348,11 @@
   /* RESPONSIVE TABLET */
   @media (max-width: 900px) {
     .nav-links { display: none; }
+
+  @media (max-width: 900px) {
+    .hamburger { display: flex; }
+    .btn-cta { display: none; }
+  }
     .logo-img { height: 56px; }
     .doctor-block, .doctor-block.reverse {
       grid-template-columns: 1fr; gap: 36px;
@@ -438,6 +443,9 @@
       <li><a href="index.html#sedes">Sedes</a></li>
       <li><a href="index.html#contacto">Contacto</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <a href="#" class="btn-cta" onclick="document.getElementById('modal-llamamos').classList.add('open');return false;">Te llamamos</a>
   </div>
 </nav>
@@ -640,6 +648,16 @@
     </div>
   </div>
 </footer>
+
+<!-- MENÚ MÓVIL -->
+<div id="mobile-menu" class="mobile-menu">
+  <a href="index.html#hero">Home</a>
+  <a href="index.html#servicios">Servicios</a>
+  <a href="equipo.html" class="active">Equipo</a>
+  <a href="index.html#sedes">Sedes</a>
+  <a href="index.html#contacto">Contacto</a>
+  <a href="#" class="mobile-cta" onclick="document.getElementById('mobile-menu').classList.remove('open');document.getElementById('hamburger').classList.remove('active');document.body.style.overflow='';document.getElementById('modal-llamamos').classList.add('open');return false;">Te llamamos</a>
+</div>
 
 <!-- MODAL TE LLAMAMOS -->
 <div id="modal-llamamos" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
